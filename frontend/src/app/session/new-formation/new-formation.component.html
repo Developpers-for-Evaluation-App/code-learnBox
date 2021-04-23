@@ -1,0 +1,7 @@
+<div class="container">
+  <form class="mt-2">
+    <label for="name" class="text-2xl text-gray-800 font-bold">Nom de la Formation</label>
+    <input type="text" id="name" class="w-32 mb-4 relative block w-full px-3 py-2 border border-gray-300 text-gray-900 focus:outline-none focus:ring-gray-500 focus:border-gray-500 focus:z-10 sm:text-sm">
+  </form>
+  <ckeditor [editor]="Editor" data="<p>Hello, world!</p>" (change)="onChange($event)"></ckeditor>
+</div>

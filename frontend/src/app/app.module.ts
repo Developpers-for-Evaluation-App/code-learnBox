@@ -1,55 +1,36 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
-import { Routes } from '@angular/router';
+import { PublicModule } from './public/public.module';
+import { SessionModule } from './session/session.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 import { AppComponent } from './app.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { HomeComponent } from './home/home.component';
-import { PricingComponent } from './pricing/pricing.component';
-import { JoinComponent } from './join/join.component';
-
-const appRoutes: Routes = [
-
-  {
-    path: '',
-    component: HomeComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'pricing',
-    component: PricingComponent
-  },
-  {
-    path: 'join',
-    component: JoinComponent
-  },
-  {
-    path: 'signin',
-    component: SignInComponent
-  },
-  {
-    path: 'signup',
-    component: SignUpComponent
-  }  
-
-]
+import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
+import { SessionComponent } from './session/session.component';
+import { TokenInterceptor } from 'src/@core/TokenInterceptor';
+import { PublicComponent } from './public/public.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent,
-    SignInComponent,
-    HomeComponent,
-    PricingComponent,
-    JoinComponent
+    FourOhFourComponent,
+    SessionComponent,
+    PublicComponent,
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    HttpClientModule,
+    AppRoutingModule,
+    RouterModule,
+    PublicModule,
+    SessionModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

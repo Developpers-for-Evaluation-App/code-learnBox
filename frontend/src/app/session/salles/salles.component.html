@@ -1,0 +1,108 @@
+<div class="header flex flex-row">
+    <!-- Button trigger modal -->
+    <button type="button"
+        class="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-600 hover:bg-gray-700"
+        data-toggle="modal" data-target="#exampleModal">
+        New class
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Fill form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="form" (submit)="save()">
+                      <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" formControlName="name" class="form-control" name="nom" id="nom">
+                      </div>
+                      <label for="promotion">Promotion</label>
+                      <div class="row">
+                        <div class="col">
+                          <input type="text" formControlName="promotion" id="promotion" class="form-control" maxlength="12">
+                        </div>
+                      </div>
+                      <div class="mt-4 flex justify-content-end">
+                        <button type="button"
+                                class="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700"
+                                data-dismiss="modal">Close</button>
+                        <button type="submit"
+                                class="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700">Save
+                        </button>
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sm:justify-center lg:justify-center ml-4 pt-1">
+        <form action="" class="">
+            <input type="search"
+                class="appearance-none relative block w-56 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-black focus:z-10 sm:text-sm"
+                placeholder="search all classes Here ">
+        </form>
+    </div>
+</div>
+<div class="formatives mt-2 border-4 border-dashed border-gray-200 rounded-lg h-auto">
+    <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Name
+                                </th>
+                                <th scope="col"
+                                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Promotion
+                                </th>
+                                <th scope="col"
+                                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Créee le
+                                </th>
+                                <th scope="col"
+                                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr *ngFor="let salle of salles">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="text-sm font-medium text-gray-900">
+                                            {{ salle.name }}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                  <div class="text-sm text-gray-900">{{ salle.promotion }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                  <div class="text-sm text-gray-900">{{ salle.date_creation }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap w-auto">
+                                    <div class="text-sm text-gray-900 flex">
+                                        <button class="px-3 py-2 bg-blue-500 rounded-sm text-white" routerLink="edit/{{ salle.id }}">Edit</button>
+                                        <button class="px-3 py-2 bg-red-500 rounded-sm text-white ml-2" (click)="delete(salle.id)">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
